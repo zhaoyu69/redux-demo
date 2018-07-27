@@ -1,4 +1,4 @@
-let nextTodoId = 0;
+let nextTodoId = 10;
 export const addTodo = text => ({
     type: 'ADD_TODO',
     id: nextTodoId++,
@@ -20,3 +20,13 @@ export const VisibilityFilters = {
     SHOW_COMPLETED: 'SHOW_COMPLETED',
     SHOW_ACTIVE: 'SHOW_ACTIVE'
 };
+
+export const getTodoList = data => ({
+    type: "GET_TODOLIST",
+    data
+});
+
+export const getTodoListError = error => ({
+    type: "GET_TODOLIST_ERROR",
+    error
+});

@@ -15,6 +15,14 @@ const todos = (state = [], action) => {
                     ? {...todo, completed: !todo.completed}
                     : todo
             );
+        case 'GET_TODOLIST':
+            const data = action.data;
+            return data.map(d=>{
+                d.id -= 1;
+                d.text = d.name;
+                d.completed = false;
+                return d;
+            });
         default:
             return state
     }

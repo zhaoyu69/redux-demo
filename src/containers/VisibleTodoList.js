@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
-import { toggleTodo } from '../actions'
+import {getTodoList, getTodoListError, toggleTodo} from '../actions'
 import TodoList from '../components/TodoList'
+import axios from 'axios';
 
 const getVisibleTodos = (todos, filter) => {
     switch (filter) {
@@ -23,6 +24,15 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => {
+    dispatch((dispatch) => {
+        axios.get('https://jsonplaceholder.typicode.com/users')
+            .then((response) => {
+                dispatch(getTodoList(response.data))
+            })
+            .catch((error) => {
+                dispatch(getTodoListError(error))
+            })
+    });
     return {
         onTodoClick: id => {
             dispatch(toggleTodo(id))
